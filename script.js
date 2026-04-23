@@ -1,3 +1,20 @@
+// 邮箱防爬虫：点击后才显示，地址拆分存储
+function revealEmail() {
+  const u = 'drluliang';
+  const d = 'gmail.com';
+  const addr = u + '@' + d;
+  const el = document.getElementById('email-text');
+  const link = document.createElement('a');
+  link.href = 'mailto:' + addr;
+  link.textContent = addr;
+  link.style.color = '#444';
+  el.innerHTML = '';
+  el.appendChild(link);
+  // 同时让整个 contact-item 可点击
+  const wrapper = document.getElementById('email-reveal');
+  wrapper.style.cursor = 'default';
+}
+
 // 汉堡菜单
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('.nav-links');

@@ -674,6 +674,25 @@ a {
   .media-source { min-width: unset; }
 }
 
+/* ===== Email reveal button ===== */
+.email-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #aaa;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #ddd;
+  transition: color 0.2s;
+}
+
+.email-btn:hover {
+  color: #555;
+}
+
 /* ===== 滚动淡入 ===== */
 .fade-in {
   opacity: 0;
