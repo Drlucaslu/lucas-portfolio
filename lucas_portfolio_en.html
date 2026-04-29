@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Lu — A Physicist's Twenty-Year Detour Through the Internet</title>
+<style>
+  :root {
+    --bg: #f5f1ea;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --accent: #0f4c75;
+    --accent-soft: #e8f0f6;
+    --accent-2: #c2410c;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(15,23,42,0.06);
+    --shadow-strong: 0 12px 48px rgba(15,23,42,0.10);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  .hero {
+    background: linear-gradient(135deg, #0f4c75 0%, #3282b8 60%, #c2410c 100%);
+    color: #fff;
+    border-radius: 20px;
+    padding: 56px 48px;
+    box-shadow: var(--shadow-strong);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -120px;
+    top: -120px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero > * { position: relative; z-index: 2; }
+  .hero h1 {
+    font-size: 44px;
+    margin: 0 0 12px;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .hero .subtitle {
+    font-size: 20px;
+    opacity: 0.92;
+    margin: 0 0 20px;
+    font-weight: 300;
+  }
+  .hero .meta {
+    font-size: 14px;
+    opacity: 0.85;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .hero .meta a {
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.4);
+  }
+  .lang-switch {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 14px;
+    z-index: 10;
+  }
+  .lang-switch a {
+    color: #fff;
+    text-decoration: none;
+    background: rgba(255,255,255,0.18);
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.35);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .lang-switch a:hover {
+    background: #fff;
+    color: var(--accent);
+    border-color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 36px 40px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .card.intro p { font-size: 17px; }
+  .card h2 {
+    font-size: 26px;
+    margin: 0 0 18px;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .chapter-num {
+    font-size: 14px;
+    color: var(--accent-2);
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+  .card p { margin: 0 0 14px; }
+  .card p:last-child { margin-bottom: 0; }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+  a:hover { color: var(--accent-2); border-bottom-color: var(--accent-2); }
+
+  strong { color: #0b3b5c; }
+  em { color: var(--muted); font-style: italic; }
+
+  .pull {
+    border-left: 4px solid var(--accent-2);
+    background: #fff8f3;
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 16.5px;
+    color: #4a2e16;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 15px;
+  }
+  th {
+    background: var(--accent);
+    color: #fff;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 600;
+  }
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:hover td { background: var(--accent-soft); }
+
+  ul.clean { list-style: none; padding-left: 0; }
+  ul.clean li {
+    padding: 10px 0 10px 24px;
+    border-bottom: 1px dashed var(--border);
+    position: relative;
+  }
+  ul.clean li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--accent-2);
+  }
+  ul.clean li:last-child { border-bottom: none; }
+
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 18px 22px;
+    background: var(--accent-soft);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+  .toc a {
+    background: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .toc a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 24px 0 0;
+  }
+
+  @media (max-width: 700px) {
+    .hero { padding: 36px 24px; }
+    .hero h1 { font-size: 32px; }
+    .hero .subtitle { font-size: 16px; }
+    .card { padding: 24px 22px; }
+    .card h2 { font-size: 22px; }
+    .lang-switch { position: static; margin-bottom: 14px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="hero">
+    <div class="lang-switch"><a href="lucas_portfolio_zh.html">中文 →</a></div>
+    <h1>Lucas Lu</h1>
+    <p class="subtitle">A physicist's twenty-year detour through the internet</p>
+    <div class="meta">
+      <span>📍 Singapore</span>
+      <span>🎓 SMU Physics Ph.D.</span>
+      <span>🔗 <a href="https://linkedin.com/in/sixwings/">linkedin.com/in/sixwings</a></span>
+      <span>🐦 <a href="https://twitter.com/drlucaslu">@DrLucaslu</a></span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <a href="#prologue">Prologue</a>
+    <a href="#ch1">① Physics</a>
+    <a href="#ch2">② Blogdriver / Bokee</a>
+    <a href="#ch3">③ Alibaba</a>
+    <a href="#ch4">④ LightInTheBox</a>
+    <a href="#ch5">⑤ 5Miles</a>
+    <a href="#ch6">⑥ Clapper</a>
+    <a href="#ch7">⑦ ByteTrade</a>
+    <a href="#writing">Writing</a>
+    <a href="#press">Press</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="card intro" id="prologue">
+    <p>Singapore, Spring 2026.</p>
+    <p>If you'd met me in <strong>2001</strong>, I'd have told you the next twenty years would be spent in particle accelerators and detectors, chasing the smallest pieces of the universe.</p>
+    <p>If you'd met me in <strong>2008</strong>, I'd have told you we were rewriting Taobao's search engine in the wildest years of Chinese e-commerce.</p>
+    <p>If you'd met me in <strong>2018</strong>, I'd have walked you through <a href="https://5miles.com">5Miles</a> — the C2C local marketplace I built from scratch in Dallas, Texas — and how it ended up named Entrepreneur of the Year by <em>D CEO Magazine</em>.</p>
+    <p>If you meet me <strong>today</strong>, I'd point you at ByteTrade Lab's <a href="https://www.olares.com/">Olares</a> — our personal-cloud OS and the Olares One hardware that goes with it — and at the next generation of American creators growing up on Clapper.</p>
+    <div class="pull">Twenty years, five companies, two countries, three books. It looks scattered on a CV, but a single thread runs through all of it: <strong>I try to build products the way a physicist runs experiments — observe, hypothesize, test, iterate.</strong></div>
+  </section>
+
+  <section class="card" id="ch1">
+    <h2><span class="chapter-num">CHAPTER 01</span>From Hefei to Dallas: Physics Was the Beginning</h2>
+    <p>In 1991 I entered the <a href="https://en.ustc.edu.cn/">University of Science and Technology of China (USTC)</a>, majoring in <strong>nuclear physics</strong> at the <strong>Department of Modern Physics</strong>. Five years of undergraduate study, with a thesis titled <em>Simulation of Light Propagation in Crystals</em>. That was the first time I really felt the magic of physics: complicated phenomena reduced to clean equations, then re-conjured in code.</p>
+    <p>Graduate school took me to the Institute of High Energy Physics, Chinese Academy of Sciences, where I worked on pion mass measurements. That training taught me to live with error bars — there is no truth without uncertainty, only smaller uncertainty.</p>
+    <p>In 2001 I went to the United States to pursue a Ph.D. at <a href="https://www.smu.edu/">Southern Methodist University (SMU)</a>, focused on high-energy physics and new analysis methods at the LHC. My 2005 dissertation, <em>Significance Calculation and a New Analysis Method in Searching for New Physics at the LHC</em>, was the academic culmination of all that. Along the way, I served as president of the Chinese Students Association — my first real attempt at running an organization.</p>
+    <p>I assumed I'd spend my life doing physics. Then the Chinese internet took off, and everything changed.</p>
+  </section>
+
+  <section class="card" id="ch2">
+    <h2><span class="chapter-num">CHAPTER 02</span>From Blogdriver to Bokee: Saying Goodbye to the Lab (2003–2007)</h2>
+    <p>The story actually starts in <strong>2003</strong>, while I was still working on my Ph.D. in the U.S. In my spare time, my co-founder <strong>Kevin Wen (文心)</strong> and I started <strong>Blogdriver (博客动力)</strong> — one of the earliest independent blogging platforms in China. "Blogging" was a brand-new concept back then — no Weibo, no WeChat, no TikTok — and blogs were the most cutting-edge way for ordinary people to publish themselves.</p>
+    <p>In <strong>2005</strong>, Blogdriver was acquired by Bokee, and I joined Bokee as <strong>CTO</strong>. What had been a graduate-school side project became my first full-time internet job — and the moment I formally left particle physics behind for the internet industry.</p>
+    <p>Going from particle physics to internet products looked like a huge jump from the outside. From the inside it felt natural: user behavior is just another kind of experimental data — the error bars come from people, not detectors. I learned product cadence, user growth, and technical architecture — none of which had appeared in any of my dissertations.</p>
+    <p>Those years also became the source material for three books on UNIX systems and search engines that stayed in print for years afterward.</p>
+  </section>
+
+  <section class="card" id="ch3">
+    <h2><span class="chapter-num">CHAPTER 03</span>Alibaba / Taobao: Four Years Inside Chinese E-commerce's Wildest Era (2007–2011)</h2>
+    <p>I joined Taobao in 2007. Those were the years Taobao went from "a fast-growing platform" to "a piece of national infrastructure."</p>
+    <p>I started by rebuilding Taobao's <strong>search engine, advertising platform, and data storage</strong> — the systems behind every "white down jacket" or "free shipping under $15" query a buyer typed. Every latency improvement, every recall lift, translated immediately into seller revenue and buyer experience. The feeling that hundreds of millions of people were <em>using</em> what we shipped was something I had never experienced in a physics lab.</p>
+    <p>Then I was promoted to <strong>General Manager of Taobao Wireless</strong>. The years around 2010 were the eve of China's mobile internet explosion — the iPhone was still spreading, Android was just emerging, and most people had never bought anything from a 4-inch screen. Our job was to move the entire Taobao experience from PC browsers onto phones.</p>
+    <p>Later I served as the <strong>founding GM of the Wasu-Taobao joint venture</strong>, an early experiment in connecting e-commerce to TVs and set-top boxes — what we'd now call "living-room commerce."</p>
+    <div class="pull">Alibaba taught me two things: <strong>technology is only meaningful at scale</strong>, and <strong>organizational ability is the most underestimated founder skill</strong>.</div>
+  </section>
+
+  <section class="card" id="ch4">
+    <h2><span class="chapter-num">CHAPTER 04</span>LightInTheBox (NYSE: LITB): Selling "Made in China" to the World (2011–2014)</h2>
+    <p>In 2011 I joined LightInTheBox as <strong>CTO</strong>. The company was a cross-border B2C platform shipping Chinese-made apparel, accessories, and consumer electronics to customers in Europe and North America. It went public on the <strong>NYSE in 2013</strong>.</p>
+    <p>Alibaba had taught me about scale inside one country. LightInTheBox taught me about cross-border compliance and global operations. When an order leaves a warehouse in Shenzhen, clears customs, and ends up at a doorstep in Berlin, the coupling between technology and supply chain is much tighter than it looks from the outside.</p>
+    <p>This experience is what eventually pushed me to move to the U.S. and build something locally.</p>
+  </section>
+
+  <section class="card" id="ch5">
+    <h2><span class="chapter-num">CHAPTER 05</span>5Miles: Building a Local C2C Marketplace in America (2014–2021)</h2>
+    <p>In 2014 I moved to Dallas, Texas, and founded <a href="https://5miles.com">5Miles</a> — a hyperlocal C2C marketplace where neighbors within a 5-mile radius could trade used furniture, phones, cars, and local services.</p>
+    <p>The U.S. C2C landscape at the time was dominated by Craigslist and Facebook Marketplace. Craigslist's product was frozen in the 2000s; Facebook hadn't put real weight behind Marketplace yet. We saw a real opening — if you got <strong>mobile, trust, and local operations</strong> right, there was a meaningful market to take.</p>
+    <p>5Miles raised over <strong>$30M in venture funding</strong>, was repeatedly profiled in the <em>Dallas Business Journal</em> as "the local marketplace challenging Craigslist," and in <strong>2018</strong> I was honored to receive <strong>Entrepreneur of the Year</strong> from <em>D CEO Magazine</em>.</p>
+    <p>5Miles was the first time I built a company end-to-end as Founder/CEO in a country that wasn't my own — hiring, fundraising, compliance, local marketing, product, engineering. Every single piece was new.</p>
+    <div class="pull">In 2017, while still running 5Miles, I founded <strong>CyberMiles</strong> — a blockchain purpose-built for marketplaces and local commerce. It was my first serious dive into Web3, and it sparked a deep interest in <em>decentralized trust and payments</em>. CyberMiles ended up being the bridge that took me from 5Miles to what would later become ByteTrade Lab.</div>
+  </section>
+
+  <section class="card" id="ch6">
+    <h2><span class="chapter-num">CHAPTER 06</span>Clapper: A Creator Community Born in the Pandemic (2020–present)</h2>
+    <p>In 2020 the pandemic locked the world indoors and pushed the creator economy into hyperdrive. That year I co-founded <strong>Clapper</strong> and serve as <strong>Co-founder & Chair</strong>. The core team is in fact the same crew I'd built 5Miles with: <strong>Edison Chen</strong> joined as CEO to run day-to-day operations, and two other 5Miles partners — <strong>Wang Chenglong</strong> and <strong>Lv Yi</strong> — came on as co-founders / partners and helped take Clapper from zero.</p>
+    <p>Clapper has a clear position: a short-video and audio community <strong>built for adults, anchored on authentic voices</strong>. We don't chase the polished influencer aesthetic and we don't try to clone any existing platform. We focus on the people the mainstream platforms tend to flatten or push aside — blue-collar workers, veterans, farmers, small-town entrepreneurs.</p>
+    <p>A few years in, Clapper has grown into <strong>one of the top 5 social media platforms in the U.S.</strong>, with a particularly deep base across the South and Midwest. In a content world dominated by algorithms and advertisers, holding a place where real people can speak honestly is — to me personally — the most meaningful thing this company does.</p>
+  </section>
+
+  <section class="card" id="ch7">
+    <h2><span class="chapter-num">CHAPTER 07</span>ByteTrade Lab: AI and Robotics, the Next Stop (2022–present)</h2>
+    <p>Since 2022 I've been spending more of my time at <strong>ByteTrade Lab</strong> in Singapore as <strong>CEO</strong>, focused on frontier research and product incubation in AI, robotics, and Web3. The Lab closed a <strong>$40M Series A in 2022</strong> led by SIG Asia, INCE Capital, BAI Capital, and Sky9 Capital.</p>
+    <p>Our core product line is <a href="https://www.olares.com/"><strong>Olares</strong></a>:</p>
+    <ul class="clean">
+      <li><strong>Olares OS</strong> — an open-source personal cloud operating system that runs on hardware you own, letting you host your own data, AI models, apps, and identity the way you'd run a personal server. The mission in one line: <em>Let people own their data again.</em></li>
+      <li><strong>Olares One</strong> — our turnkey hardware device launched in 2026, shipped with Olares OS preinstalled, so an ordinary user can have a "private cloud + AI home server" sitting in the living room — no DIY required.</li>
+    </ul>
+    <div class="pull">The single conviction I hold most strongly about the next ten years: <strong>agents and embodied intelligence will rewrite most of the software and services industry</strong>. The scale of this rewrite is at least as large as what the internet did to retail starting in 2005. I want to spend this decade at the front of that.</div>
+  </section>
+
+  <section class="card" id="writing">
+    <h2><span class="chapter-num">WRITING</span>Writing & Publications</h2>
+    <p>When I'm not building, I write to crystallize what I've learned:</p>
+    <table>
+      <thead>
+        <tr><th style="width:90px">Year</th><th>Title</th><th>Publisher</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2006</td><td><em>Search Engine Principles and Methods</em></td><td>Publishing House of Electronics Industry</td></tr>
+        <tr><td>2005</td><td>"Significance Calculation and a New Analysis Method in Searching for New Physics at the LHC"</td><td>SMU Physics Preprint</td></tr>
+        <tr><td>2000</td><td><em>UNIX Network Administration</em></td><td>Tsinghua University Press</td></tr>
+        <tr><td>2000</td><td><em>UNIX Practical Handbook</em></td><td>China Machine Press</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card" id="press">
+    <h2><span class="chapter-num">PRESS</span>Press & Recognition</h2>
+    <ul class="clean">
+      <li><strong>D CEO Magazine</strong> (2018) — Entrepreneur of the Year</li>
+      <li><strong>Dallas Business Journal</strong> — multiple in-depth profiles of 5Miles</li>
+      <li><strong>TechCrunch / PYMNTS</strong> — coverage of 5Miles' $30M raise</li>
+      <li><strong>Business Wire</strong> — KTX.Finance and GaiaNet funding announcements</li>
+      <li><strong>Crunchbase</strong> — entrepreneur and investor profile</li>
+    </ul>
+  </section>
+
+  <section class="card" id="contact">
+    <h2><span class="chapter-num">CONTACT</span>Get in Touch</h2>
+    <p>If you're working on <strong>AI, agents, robotics, the creator economy, cross-border commerce, or local marketplaces</strong> — or if you just want to talk about how a physicist approaches building products — I'd love to hear from you.</p>
+    <ul class="clean">
+      <li>LinkedIn: <a href="https://linkedin.com/in/sixwings/">linkedin.com/in/sixwings</a></li>
+      <li>X / Twitter: <a href="https://twitter.com/drlucaslu">@DrLucaslu</a></li>
+      <li>Email: see the portfolio homepage</li>
+    </ul>
+    <p style="margin-top:18px; color:var(--muted);">Based in Singapore. Frequently in Beijing, Dallas, and the Bay Area.</p>
+  </section>
+
+  <p class="footer">© 2026 Lucas Lu · The story isn't finished — it's only just begun.</p>
+</div>
+</body>
+</html>
