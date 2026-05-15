@@ -18,7 +18,7 @@ Twenty years, five companies, two countries, three books. It looks scattered on 
 
 ## I. From Hefei to the United States: Physics Was the Beginning
 
-In 1991 I entered the [University of Science and Technology of China (USTC)](https://en.ustc.edu.cn/) — **admitted without entrance exams as a recommended student, on the strength of winning a national high-school physics competition** — majoring in **nuclear physics** at the **Department of Modern Physics**. Five years of undergraduate study, with a thesis titled *Simulation of Light Propagation in Crystals*. That was the first time I really felt the magic of physics: complicated phenomena reduced to clean equations, then re-conjured in code.
+In 1991 I entered the [University of Science and Technology of China (USTC)](https://en.ustc.edu.cn/) — admitted without entrance exams as a recommended student, on the strength of winning a national high-school physics competition — majoring in **nuclear physics** at the **Department of Modern Physics**. Five years of undergraduate study, with a thesis titled *Simulation of Light Propagation in Crystals*. That was the first time I really felt the magic of physics: complicated phenomena reduced to clean equations, then re-conjured in code.
 
 Graduate school took me to the Institute of High Energy Physics, Chinese Academy of Sciences, where I worked on pion mass measurements. That training taught me to live with error bars — there is no truth without uncertainty, only smaller uncertainty.
 
